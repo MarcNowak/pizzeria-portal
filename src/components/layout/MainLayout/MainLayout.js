@@ -5,13 +5,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Container from '@material-ui/core/Container';
 
-// const MainLayout = () => (
-// <div>
-//   <PageNav />
-//   {props.children}
-// </div>
-// );
-
 const MainLayout = ({ children }) => (
   <div>
     <AppBar>
