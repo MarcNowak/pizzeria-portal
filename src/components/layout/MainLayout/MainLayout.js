@@ -32,4 +32,4 @@ MainLayout.propTypes = {
   children: PropTypes.node,
 };
 
-export default MainLayout
+export default MainLayout;
