@@ -25,7 +25,7 @@ const theme = createTheme({
 
 function App() {
   return (
-    <BrowserRouter basename={'/panel'}>
+    <BrowserRouter basename={'/'}>
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
           <MainLayout>
