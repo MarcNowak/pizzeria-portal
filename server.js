@@ -11,11 +11,11 @@ const middlewares = jsonServer.defaults({
 });
 const port = process.env.PORT || 3131;
 
-server.get(/^\/.*/, (req,res) =>{
-  if(req.url === '/'){
+server.get(/^\/panel.*/, (req,res) =>{
+  if(req.url === '/panel'){
     req.url += '/';
   }
-  const filePath = __dirname+req.url.replace('/', '/build');
+  const filePath = __dirname+req.url.replace('/panel', '/build');
   if(fs.existsSync(filePath)){
     res.sendFile(filePath);
   } else {
