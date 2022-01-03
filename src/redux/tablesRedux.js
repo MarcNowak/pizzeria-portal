@@ -4,7 +4,6 @@ import { api } from '../settings';
 /* selectors */
 export const getAll = ({ tables }) => tables.data;
 export const getLoadingState = ({ tables }) => tables.loading;
-export const getTable = ({ tables }) => tables.status;
 
 /* action name creator */
 const reducerName = 'tables';
@@ -14,25 +13,19 @@ const createActionName = name => `app/${reducerName}/${name}`;
 const FETCH_START = createActionName('FETCH_START');
 const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
 const FETCH_ERROR = createActionName('FETCH_ERROR');
-const FETCH_TABLECHANGE = createActionName('FETCH_TABLECHANGE');
-const FETCH_TABLECHANGESUCCESS = createActionName('FETCH_TABLECHANGESUCCESS');
-const FETCH_TABLECHANGEERROR = createActionName('FETCH_TABLECHANGEERROR');
-
+const FETCH_TABLE_STATUS_UPDATE = createActionName('FETCH_TABLE_STATUS_UPDATE');
 
 /* action creators */
 export const fetchStarted = payload => ({ payload, type: FETCH_START });
 export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
 export const fetchError = payload => ({ payload, type: FETCH_ERROR });
-export const fetchTableChange = payload => ({ payload, type: FETCH_TABLECHANGE });
-export const fetchTableChangeSuccess = payload => ({ payload, type: FETCH_TABLECHANGESUCCESS });
-export const fetchTableChangeError = payload => ({ payload, type: FETCH_TABLECHANGEERROR });
+export const fetchTableStatusUpdate = payload => ({ payload, type: FETCH_TABLE_STATUS_UPDATE });
 
 
 /* thunk creators */
 export const fetchFromAPI = () => {
   return (dispatch, getState) => {
     dispatch(fetchStarted());
-    dispatch(fetchTableChange());
 
     Axios
       .get(`${api.url}/api/${api.tables}`)
@@ -43,13 +36,21 @@ export const fetchFromAPI = () => {
         dispatch(fetchError(err.message || true));
       });
 
+  };
+};
+
+/* thunk - table status update */
+export const updateTableStatusAPI = (id, status) => {
+  return (dispatch, getState) => {
+    dispatch(fetchTableStatusUpdate());
+
     Axios
-      .get(`${api.url}/api/${api.tables}`)
+      .put(`${api.url}/api/${api.tables}/${id}`, {status})
       .then(response => {
-        dispatch(fetchTableChangeSuccess(response.data.status));
+        dispatch(fetchTableStatusUpdate(response.data));
       })
       .catch(error => {
-        dispatch(fetchTableChangeError(error.message));
+        dispatch(fetchError(error.message || true));
       });
   };
 };
@@ -83,6 +84,16 @@ export default function reducer(statePart = [], action = {}) {
           active: false,
           error: action.payload,
         },
+      };
+    }
+    case FETCH_TABLE_STATUS_UPDATE: {
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: false,
+        },
+
       };
     }
 
