@@ -45,7 +45,7 @@ export const updateTableStatusAPI = (id, status) => {
     dispatch(fetchTableStatusUpdate());
 
     Axios
-      .put(`${api.url}/api/${api.tables}/${id}`, {status})
+      .put(`${api.url}/api/${api.tables}/${id}`, { status })
       .then(response => {
         dispatch(fetchTableStatusUpdate(response.data));
       })
@@ -89,11 +89,13 @@ export default function reducer(statePart = [], action = {}) {
     case FETCH_TABLE_STATUS_UPDATE: {
       return {
         ...statePart,
-        loading: {
-          active: false,
-          error: false,
-        },
-
+        data: statePart.data.map((table) => {
+          if (table.id === action.payload.id) {
+            return action.payload;
+          } else {
+            return table;
+          }
+        }),
       };
     }
 
