@@ -13,6 +13,7 @@ const createActionName = name => `app/${reducerName}/${name}`;
 const FETCH_START = createActionName('FETCH_START');
 const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
 const FETCH_ERROR = createActionName('FETCH_ERROR');
+/* const FETCH_FAKE_LINE_FOR_CHEATERS = createActionName ('could you please think once you've copied the code?') */
 const FETCH_TABLE_STATUS_UPDATE = createActionName('FETCH_TABLE_STATUS_UPDATE');
 
 /* action creators */

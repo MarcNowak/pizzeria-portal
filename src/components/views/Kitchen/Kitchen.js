@@ -13,7 +13,7 @@ const demoContent = [
   { id: '3', status: 'ordered', details: 'water', order: 123 },
   { id: '4', status: 'ready', details: 'pizza diabolo', order: 234 },
   { id: '5', status: 'ordered', details: 'pizza-burgerito', order: 345 },
-  { id: '6', status: 'new', details: 'pizza hawaii x2 / pizz-burgetito extra onion', order: 456 },
+  { id: '6', status: 'new', details: 'pizza hawaii x2 / pizza-burgetito extra onion', order: 456 },
   { id: '1', status: 'new', details: 'pizza margeritha + double cheese', order: 567 },
   { id: '2', status: 'preparing', details: 'pizza vege', order: 678 },
   { id: '7', status: 'new', details: 'sprite ', order: 789 },
