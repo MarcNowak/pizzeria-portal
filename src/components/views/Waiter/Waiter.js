@@ -33,35 +33,35 @@ class Waiter extends React.Component {
         return (
           <>
             <Button onClick={() => fetchTableStatusUpdate(id, 'thinking')}>thinking</Button>
-            <Button onClick={() => fetchTableStatusUpdate(id, 'ordered')} href={process.env.PUBLIC_URL + '/waiter/order/new'}>new order</Button>
+            <Button onClick={() => fetchTableStatusUpdate(id, 'ordered')} to={`${process.env.PUBLIC_URL}/waiter/order/`}>new order</Button>
           </>
         );
       case 'thinking':
         return (
           <>
-            <Button onClick={() => fetchTableStatusUpdate(id, 'ordered')} href={process.env.PUBLIC_URL + '/waiter/order/new'}>new order</Button>
+            <Button onClick={() => fetchTableStatusUpdate(id, 'ordered')} to={`${process.env.PUBLIC_URL}/waiter/order/new`}>new order</Button>
           </>
         );
       case 'ordered':
         return (
           <>
             <Button onClick={() => fetchTableStatusUpdate(id, 'prepared')}>prepared</Button>
-            <Button href={process.env.PUBLIC_URL + '/waiter/order/:id'}>new order</Button>
+            <Button to={`${process.env.PUBLIC_URL}/waiter/order/:id`}>new order</Button>
           </>
         );
       case 'prepared':
         return (
           <>
-            <Button onClick={() => fetchTableStatusUpdate(id, 'delivered')} href={process.env.PUBLIC_URL + '/waiter/order/new'}>delivered</Button>
+            <Button onClick={() => fetchTableStatusUpdate(id, 'delivered')} to={`${process.env.PUBLIC_URL}/waiter/order/new`}>delivered</Button>
           </>
         );
       case 'delivered':
         return (
-          <Button onClick={() => fetchTableStatusUpdate(id, 'paid')} href={process.env.PUBLIC_URL + '/waiter/order/new'}>paid</Button>
+          <Button onClick={() => fetchTableStatusUpdate(id, 'paid')} to={`${process.env.PUBLIC_URL}/waiter/order/new`}>paid</Button>
         );
       case 'paid':
         return (
-          <Button onClick={() => fetchTableStatusUpdate(id, 'free')} href={process.env.PUBLIC_URL + '/waiter/order/new'}>free</Button>
+          <Button onClick={() => fetchTableStatusUpdate(id, 'free')} to={`${process.env.PUBLIC_URL}/waiter/order/new`}>free</Button>
         );
       default:
         return null;

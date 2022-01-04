@@ -42,7 +42,7 @@ export const fetchFromAPI = () => {
 /* thunk - table status update */
 export const updateTableStatusAPI = (id, status) => {
   return (dispatch, getState) => {
-    dispatch(fetchTableStatusUpdate());
+    dispatch(fetchStarted());
 
     Axios
       .put(`${api.url}/api/${api.tables}/${id}`, { status })
@@ -89,6 +89,10 @@ export default function reducer(statePart = [], action = {}) {
     case FETCH_TABLE_STATUS_UPDATE: {
       return {
         ...statePart,
+        loading: {
+          active: false,
+          error: false,
+        },
         data: statePart.data.map((table) => {
           if (table.id === action.payload.id) {
             return action.payload;
